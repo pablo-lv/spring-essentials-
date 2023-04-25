@@ -24,4 +24,11 @@ public class VideoService {
         this.videos = List.copyOf(extend);
         return videos;
     }
+
+    public Video createVideo(Video video) {
+        List<Video> extend = new ArrayList<>(videos);
+        extend.add(video);
+        this.videos = List.copyOf(extend);
+        return video;
+    }
 }
