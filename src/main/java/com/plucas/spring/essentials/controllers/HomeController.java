@@ -3,23 +3,28 @@ package com.plucas.spring.essentials.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class HomeController {
 
-    record Video(String name) {}
 
-    List<Video> videos = List.of(
-            new Video("Need Help with your spring boot 3"),
-            new Video("Don't do this to your own code!"),
-            new Video("Secrets to fix broken code")
-    );
+    private final VideoService videoService;
+
+    public HomeController(VideoService videoService) {
+        this.videoService = videoService;
+    }
 
     @GetMapping("/")
     public String index(Model model) {
-        model.addAttribute("videos", videos);
+        model.addAttribute("videos", videoService.getVideos());
         return "index";
+    }
+
+    @PostMapping("/new-video")
+    public String newVideo(@ModelAttribute Video newVideo) {
+        videoService.create(newVideo);
+        return  "redirect:/";
     }
 }
