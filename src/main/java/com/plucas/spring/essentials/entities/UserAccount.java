@@ -3,6 +3,8 @@ package com.plucas.spring.essentials.entities;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,6 +29,14 @@ public class UserAccount {
                 .map(SimpleGrantedAuthority::new)
                 .map(GrantedAuthority.class::cast)
                 .toList();
+    }
+
+    public UserDetails asUser() {
+        return User.withDefaultPasswordEncoder() //
+                .username(getUsername()) //
+                .password(getPassword()) //
+                .authorities(getAuthorities()) //
+                .build();
     }
 
     public Long getId() {

@@ -1,11 +1,8 @@
 package com.plucas.spring.essentials.repositories;
 
 import com.plucas.spring.essentials.entities.UserAccount;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.repository.Repository;
 
-public interface UserRepository extends JpaRepository<UserAccount, Long> {
-
+public interface UserRepository extends Repository<UserAccount, Long> {
     UserAccount findByUsername(String username);
-
 }
