@@ -2,6 +2,7 @@ package com.plucas.spring.essentials.repositories;
 
 import com.plucas.spring.essentials.entities.VideoEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -16,4 +17,8 @@ public interface VideoRepository extends JpaRepository<VideoEntity, Long> {
     List<VideoEntity> findByNameContainsIgnoreCase(String name);
 
     List<VideoEntity> findByDescriptionContainsIgnoreCase(String description);
+
+    @PreAuthorize("#entity.username == authentication.name")
+    @Override
+    void delete(VideoEntity entity);
 }

@@ -10,13 +10,20 @@ public class VideoEntity {
     @Id @GeneratedValue
     private Long id;
 
+    private String username;
+
     private String name;
 
 
     private String description;
 
     public VideoEntity() {
-        this(null, null);
+    }
+
+    public VideoEntity(String username, String name, String description) {
+        this.username = username;
+        this.description = description;
+        this.name = name;
     }
 
     public VideoEntity(String name, String description) {
@@ -48,5 +55,13 @@ public class VideoEntity {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

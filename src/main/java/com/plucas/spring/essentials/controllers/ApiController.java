@@ -1,5 +1,6 @@
 package com.plucas.spring.essentials.controllers;
 
+import com.plucas.spring.essentials.entities.VideoEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +19,7 @@ public class ApiController {
     }
 
     @GetMapping("/api/videos")
-    public List<Video> all() {
+    public List<VideoEntity> all() {
         return videoService.getVideos();
     }
 
